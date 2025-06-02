@@ -1,5 +1,4 @@
 import React from "react";
-import './home.css';
 
 import { useState, useEffect } from "react";
 // import { Button } from "@/components/ui/button";
@@ -64,7 +63,7 @@ export default function Home() {
     return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
       {/* Floating Navigation */}
-      <div className="bg-green-500 text-white p-6 rounded-xl text-2xl font-bold">
+      <div className="bg-pink-500 text-white p-6 rounded-xl text-2xl font-bold">
       🎉 Tailwind fonctionne !
     </div>
       <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 backdrop-blur-lg rounded-full px-8 py-4 shadow-xl border border-white/20">
