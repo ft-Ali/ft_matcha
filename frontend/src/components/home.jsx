@@ -1,5 +1,4 @@
 import React from "react";
-import './home.css';
 
 import { useState, useEffect } from "react";
 // import { Button } from "@/components/ui/button";
@@ -64,8 +63,10 @@ export default function Home() {
     return (
     
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
+
        
       <img class="rounded-full w-[110px] h-[110px]" src="image/logo.png" alt="image description"/>
+
 
       <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 backdrop-blur-lg rounded-full px-8 py-4 shadow-xl border border-white/20">
         <div className="flex items-center space-x-8">
