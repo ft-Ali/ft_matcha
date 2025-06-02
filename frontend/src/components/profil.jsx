@@ -1,9 +1,8 @@
 import React from 'react';
-import './profil.css';
 
 function Profile() {
     return (
-        <div className="desktop-container">
+    <div className="desktop-container">
         <div class="top-nav">
             <button class="nav-btn">←</button>
             <button class="nav-btn">⚙️</button>

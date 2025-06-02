@@ -6,7 +6,7 @@ services:
       context: ./frontend
     container_name: ft_matcha_frontend
     ports:
-      - "3000:80"   # expose port 80 du container frontend sur 3000 de la machine
+      - "3000:80"
   nginx:
     image: nginx:latest
     ports:
