@@ -62,20 +62,13 @@ export default function Home() {
         }
             
     return (
+    
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
-      {/* Floating Navigation */}
-      <div className="bg-green-500 text-white p-6 rounded-xl text-2xl font-bold">
-      🎉 Tailwind fonctionne !
-    </div>
+       
+      <img class="rounded-full w-[110px] h-[110px]" src="image/logo.png" alt="image description"/>
+
       <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/80 backdrop-blur-lg rounded-full px-8 py-4 shadow-xl border border-white/20">
         <div className="flex items-center space-x-8">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm">🐾</span>
-            </div>
-            <span className="font-bold text-gray-800">PetMatch</span>
-          </div>
-
           <div className="hidden md:flex space-x-6 text-sm">
             <a href="#features" className="text-gray-600 hover:text-purple-600 transition-colors">
               Découvrir
@@ -89,21 +82,20 @@ export default function Home() {
           </div>
 
           <div className="flex space-x-3">
-            {/* <Button variant="ghost" size="sm" onClick={openLoginModal} className="text-gray-600 hover:text-purple-600">
+            <button variant="ghost" size="sm" onClick={openLoginModal} className="text-gray-600 hover:text-purple-600">
               Connexion
-            </Button>
-            <Button
+            </button>
+            <button
               size="sm"
               onClick={openRegisterModal}
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-full px-6"
             >
               Rejoindre
-            </Button> */}
+            </button>
           </div>
         </div>
       </nav>
 
-      Hero Section avec animation
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         {/* Animated background elements */}
         <div className="absolute inset-0">
@@ -134,22 +126,14 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              {/* <Button
+              <button
                 size="lg"
                 onClick={openRegisterModal}
                 className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-full px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <span className="mr-2">🚀</span>
+                <span className="mr-2 text-blue-500">🐾</span>
                 Commencer l'aventure
-              </Button> */}
-              {/* <Button
-                variant="outline"
-                size="lg"
-                className="border-2 border-purple-300 text-purple-600 hover:bg-purple-50 rounded-full px-8 py-4 text-lg"
-              >
-                <span className="mr-2">📱</span>
-                Télécharger l'app
-              </Button> */}
+              </button>
             </div>
 
             <div className="flex items-center space-x-6 text-sm text-gray-500">
@@ -217,8 +201,8 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-pink-50 to-purple-50 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
+            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-pink-50 to-purple-50 hover:-translate-y-2">
+              <cardcontent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🧬</span>
                 </div>
@@ -226,11 +210,11 @@ export default function Home() {
                 <p className="text-gray-600 leading-relaxed">
                   Notre IA analyse la compatibilité entre vous et vos animaux pour des rencontres parfaites
                 </p>
-              </CardContent>
-            </Card>
+              </cardcontent>
+            </card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-purple-50 to-indigo-50 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
+            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-purple-50 to-indigo-50 hover:-translate-y-2">
+              <cardcontent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🛡️</span>
                 </div>
@@ -238,11 +222,11 @@ export default function Home() {
                 <p className="text-gray-600 leading-relaxed">
                   Vérification d'identité, modération 24/7 et signalement pour une communauté saine
                 </p>
-              </CardContent>
-            </Card>
+              </cardcontent>
+            </card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-indigo-50 to-pink-50 hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
+            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-indigo-50 to-pink-50 hover:-translate-y-2">
+              <cardcontent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🌍</span>
                 </div>
@@ -250,8 +234,8 @@ export default function Home() {
                 <p className="text-gray-600 leading-relaxed">
                   Rejoignez une communauté mondiale de passionnés d'animaux dans plus de 50 pays
                 </p>
-              </CardContent>
-            </Card> */}
+              </cardcontent>
+            </card>
           </div>
         </div>
       </section>
@@ -324,6 +308,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="py-20 bg-white">
+        ???????
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="group">
@@ -373,25 +358,18 @@ export default function Home() {
             Rejoignez la communauté PetMatch dès aujourd'hui et découvrez l'amour à travers les yeux de vos compagnons à
             quatre pattes.
           </p>
-{/* 
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button
+            <button
               size="lg"
               onClick={openRegisterModal}
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-full px-10 py-4 text-lg shadow-2xl hover:shadow-pink-500/25 transition-all duration-300 transform hover:-translate-y-1"
             >
               <span className="mr-2">💕</span>
               Créer mon profil
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-white/30 text-white hover:bg-white/10 rounded-full px-10 py-4 text-lg backdrop-blur-sm"
-            >
-              <span className="mr-2">📱</span>
-              Télécharger l'app
-            </Button>
-          </div> */}
+            </button>
+           
+          </div>
 
           <p className="text-sm opacity-70">
             Gratuit pour toujours • Plus de 50,000 couples formés • Disponible sur iOS et Android
@@ -403,12 +381,7 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm">🐾</span>
-              </div>
-              <span className="font-bold text-xl">PetMatch</span>
-            </div>
+                <img class="rounded-full w-[110px] h-[110px]" src="image/logo.png" alt="image description"/>
 
             <div className="flex space-x-8 text-sm text-gray-400">
               <a href="#" className="hover:text-white transition-colors">

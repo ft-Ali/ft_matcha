@@ -8,8 +8,6 @@ function Profile() {
             <button class="nav-btn">←</button>
             <button class="nav-btn">⚙️</button>
         </div>
-
-        
         <div class="profile-image-section">
             {/* <img src="/placeholder.svg?height=700&width=500" alt="Photo de profil" class="profile-image"> */}
             <div class="online-indicator">🟢 En ligne</div>
