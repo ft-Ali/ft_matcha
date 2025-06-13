@@ -1,19 +1,8 @@
-version: '3.8'
-
 services:
   frontend:
-    build:
-      context: ./frontend
-    container_name: ft_matcha_frontend
+    build: ./frontend
     ports:
-      - "3000:80"
-  nginx:
-    image: nginx:latest
-    ports:
-      - "8080:80"
-      - "8000:443"
+      - "5173:5173"  # Dev
+      - "443:443"     # Prod
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/certs:/etc/nginx/certs:ro
-    depends_on:
-      - frontend
