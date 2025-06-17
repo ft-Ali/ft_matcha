@@ -2,7 +2,9 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "5173:5173"  # Dev
-      - "443:443"     # Prod
+      - "5173:5173"
     volumes:
-      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+  
