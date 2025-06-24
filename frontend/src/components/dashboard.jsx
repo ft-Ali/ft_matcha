@@ -13,7 +13,6 @@ export default function DashboardPage() {
     newLikes: 5,
     newMessages: 3,
     newMatches: 2,
-    profileViews: 12,
   })
 const navigate = useNavigate();
   // Mettre à jour l'heure
@@ -42,7 +41,6 @@ const navigate = useNavigate();
       icon: "🔍",
       gradient: "from-pink-500 to-rose-500",
       bgGradient: "from-pink-50 to-rose-50",
-      stats: "12 nouveaux profils",
       action: "Commencer à explorer",
       href: "/profile",
     },
@@ -54,7 +52,6 @@ const navigate = useNavigate();
       icon: "💕",
       gradient: "from-purple-500 to-violet-500",
       bgGradient: "from-purple-50 to-violet-50",
-      stats: `${notifications.newLikes} likes reçus`,
       action: "Voir mes likes",
       href: "/likes",
       badge: notifications.newLikes,
@@ -67,7 +64,6 @@ const navigate = useNavigate();
       icon: "💬",
       gradient: "from-indigo-500 to-blue-500",
       bgGradient: "from-indigo-50 to-blue-50",
-      stats: `${notifications.newMessages} nouveaux messages`,
       action: "Ouvrir les messages",
       href: "/messages",
       badge: notifications.newMessages,
@@ -80,7 +76,6 @@ const navigate = useNavigate();
       icon: "⚙️",
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-emerald-50 to-teal-50",
-      stats: "Profil à 85% complet",
       action: "Modifier les paramètres",
       href: "/settings",
     },
@@ -144,18 +139,6 @@ const navigate = useNavigate();
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="text-right">
-                <p className="text-sm text-gray-600">Profil complété</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-pink-500 to-purple-600 rounded-full transition-all duration-500"
-                      style={{ width: `${userProfile.completionRate}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-semibold text-purple-600">{userProfile.completionRate}%</span>
-                </div>
-              </div>
               <Button variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50">
                 👤 Mon profil
               </Button>
@@ -179,11 +162,7 @@ const navigate = useNavigate();
         </div>
 
         {/* Statistiques rapides */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <Card className="bg-white/60 backdrop-blur-sm border-purple-100 text-center p-4">
-            <div className="text-2xl font-bold text-pink-600">{notifications.profileViews}</div>
-            <div className="text-sm text-gray-600">Vues de profil</div>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
           <Card className="bg-white/60 backdrop-blur-sm border-purple-100 text-center p-4">
             <div className="text-2xl font-bold text-purple-600">{notifications.newMatches}</div>
             <div className="text-sm text-gray-600">Nouveaux matchs</div>
@@ -285,25 +264,6 @@ const navigate = useNavigate();
             </div>
           </CardContent>
         </Card>
-
-        {/* Actions rapides */}
-        <div className="mt-12 text-center">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">Actions rapides</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="outline" className="border-pink-300 text-pink-600 hover:bg-pink-50">
-              📷 Ajouter une photo
-            </Button>
-            <Button variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50">
-              🐾 Ajouter un animal
-            </Button>
-            <Button variant="outline" className="border-indigo-300 text-indigo-600 hover:bg-indigo-50">
-              ✏️ Modifier ma bio
-            </Button>
-            <Button variant="outline" className="border-emerald-300 text-emerald-600 hover:bg-emerald-50">
-              🎯 Ajuster mes préférences
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   )

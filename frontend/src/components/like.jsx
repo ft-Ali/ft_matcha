@@ -6,11 +6,13 @@ import { Card, CardContent } from "./UI/Card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./UI/Tabs"
 import  Badge  from "./UI/Badge"
 import  Input  from "./UI/Input"
+import { useNavigate } from 'react-router-dom';
+
 
 export default function LikesPage() {
   const [activeTab, setActiveTab] = useState("received")
   const [searchTerm, setSearchTerm] = useState("")
-
+  const navigate = useNavigate();
   // Données simulées
   const receivedLikes = [
     {
@@ -220,7 +222,7 @@ export default function LikesPage() {
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                 ← Retour
               </Button>
               <div>
