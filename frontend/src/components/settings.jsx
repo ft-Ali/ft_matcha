@@ -44,7 +44,7 @@ export default function SettingsPage() {
     autoPlay: false,
   })
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key, value) => {
     setSettings((prev) => ({ ...prev, [key]: value }))
   }
 

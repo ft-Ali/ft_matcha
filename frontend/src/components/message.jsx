@@ -149,7 +149,7 @@ const currentMessages = selectedChat ? messages[selectedChat] || [] : [];
     }
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()

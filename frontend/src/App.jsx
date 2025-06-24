@@ -4,7 +4,8 @@ import Home from './components/home';
 import SettingsPage from './components/settings';
 import MessagesPage from './components/like';
 import LikesPage from './components/message';
-
+import DashboardPage from './components/dashboard';
+import { Routes, Route } from 'react-router-dom';
 
 
 
@@ -12,12 +13,14 @@ import LikesPage from './components/message';
 function App() {
   return (
     <div className="App">
-      <Profile />
-      <SettingsPage />
-      <MessagesPage />
-      <LikesPage />
-
-      {/* <Home /> */}
+     <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/messages" element={<MessagesPage />} />
+      <Route path="/likes" element={<LikesPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
+    </Routes>
     </div>
   );
 }
