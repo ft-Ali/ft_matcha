@@ -9,13 +9,14 @@ import { Card, CardContent } from "./UI/Card"
 import { Avatar, AvatarFallback, AvatarImage } from "./UI/Avatar"
 import  Badge  from "./UI/Badge"
 import  Textarea  from "./UI/TextArea"
+import { useNavigate } from 'react-router-dom';
 
 export default function MessagesPage() {
 const [selectedChat, setSelectedChat] = useState(1)
   const [newMessage, setNewMessage] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
-    const messagesEndRef = useRef(null);
-
+  const messagesEndRef = useRef(null);
+  const navigate = useNavigate();
   // Données simulées
   const conversations = [
     {
@@ -149,7 +150,7 @@ const currentMessages = selectedChat ? messages[selectedChat] || [] : [];
     }
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
@@ -167,7 +168,7 @@ const currentMessages = selectedChat ? messages[selectedChat] || [] : [];
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                 ← Retour
               </Button>
               <div>

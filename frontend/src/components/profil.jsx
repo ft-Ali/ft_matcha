@@ -1,19 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
+  const navigate = useNavigate();
   return (
     <div className=" mx-auto grid grid-cols-[500px_1fr] max-w-[1200px] min-h-[700px] bg-white rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden relative lg:max-w-[900px] lg:grid-cols-[400px_1fr] md:max-w-[500px] md:grid-cols-1
     ">
       {/* Navigation en haut */}
       <div className="absolute top-5 left-5 right-5 flex justify-between items-center z-10">
-        <button className="bg-white/20 text-white p-3 rounded-full backdrop-blur transition hover:bg-white/30 hover:scale-110">
+        <button onClick={() => navigate('/dashboard')} className="bg-white/20 text-white p-3 rounded-full backdrop-blur transition hover:bg-white/30 hover:scale-110">
           ←
         </button>
         <button className="bg-white/20 text-white p-3 rounded-full backdrop-blur transition hover:bg-white/30 hover:scale-110">
           ⚙️
         </button>
       </div>
-
       {/* Section gauche : Image de profil */}
       <div className="
         relative
@@ -23,7 +24,7 @@ function Profile() {
       ">
         {/* Remplace src par ta vraie image */}
         <img
-          src="/placeholder.svg?height=700&width=500"
+          src="/image/meshmesh.png?height=700&width=500"
           alt="Photo de profil"
           className="w-full h-full object-cover"
         />
@@ -32,7 +33,7 @@ function Profile() {
         </div>
         <div className=" absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-8 py-10 text-white
         ">
-          <div className="text-4xl font-bold mb-2">Emma, 28</div>
+          <div className="text-4xl font-bold mb-2">Mehrshad, 26</div>
           <div className="text-lg opacity-90 leading-snug">
             Passionnée d'animaux et de nature, toujours prête pour de nouvelles aventures avec mes compagnons à quatre pattes ! 🐕🌿
           </div>
@@ -51,11 +52,11 @@ function Profile() {
           <div className="grid grid-cols-2 gap-5 mb-9 lg:grid-cols-1">
             <div className="bg-gray-100 p-5 rounded-xl border-l-4 border-indigo-400">
               <div className="font-semibold text-gray-600 text-xs uppercase tracking-wider mb-2">Genre</div>
-              <div className="text-lg text-gray-800 font-medium">Femme</div>
+              <div className="text-lg text-gray-800 font-medium">Homme</div>
             </div>
             <div className="bg-gray-100 p-5 rounded-xl border-l-4 border-indigo-400">
               <div className="font-semibold text-gray-600 text-xs uppercase tracking-wider mb-2">Attirée par</div>
-              <div className="text-lg text-gray-800 font-medium">Hommes</div>
+              <div className="text-lg text-gray-800 font-medium">Femme</div>
             </div>
             <div className="bg-gray-100 p-5 rounded-xl border-l-4 border-indigo-400">
               <div className="font-semibold text-gray-600 text-xs uppercase tracking-wider mb-2">📍 Localisation</div>

@@ -6,11 +6,13 @@ import { Card, CardContent } from "./UI/Card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./UI/Tabs"
 import  Badge  from "./UI/Badge"
 import  Input  from "./UI/Input"
+import { useNavigate } from 'react-router-dom';
+
 
 export default function LikesPage() {
   const [activeTab, setActiveTab] = useState("received")
   const [searchTerm, setSearchTerm] = useState("")
-
+  const navigate = useNavigate();
   // Données simulées
   const receivedLikes = [
     {
@@ -107,26 +109,26 @@ export default function LikesPage() {
     },
   ]
 
-  const handleLike = (userId: number) => {
+  const handleLike = (userId) => {
     console.log("Like user:", userId)
     // Logique pour liker en retour
   }
 
-  const handlePass = (userId: number) => {
+  const handlePass = (userId) => {
     console.log("Pass user:", userId)
     // Logique pour passer
   }
 
-  const handleMessage = (userId: number) => {
+  const handleMessage = (userId) => {
     console.log("Message user:", userId)
     // Redirection vers la messagerie
   }
 
-  const filteredData = (data: any[]) => {
+  const filteredData = (data) => {
     return data.filter((person) => person.name.toLowerCase().includes(searchTerm.toLowerCase()))
   }
 
-  const PersonCard = ({ person, showActions = true, isMatch = false }: any) => (
+  const PersonCard = ({ person, showActions = true, isMatch = false }) => (
     <Card className="group bg-white/60 backdrop-blur-sm border-purple-100 hover:shadow-lg transition-all duration-300 overflow-hidden">
       <CardContent className="p-0">
         <div className="relative">
@@ -170,7 +172,7 @@ export default function LikesPage() {
             </div>
             <p className="text-sm opacity-90 mb-2">{person.bio}</p>
             <div className="flex flex-wrap gap-1 mb-2">
-              {person.pets.map((pet: string, index: number) => (
+              {person.pets.map((pet, index) => (
                 <Badge key={index} variant="secondary" className="text-xs bg-white/20 text-white border-0">
                   {pet}
                 </Badge>
@@ -220,7 +222,7 @@ export default function LikesPage() {
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                 ← Retour
               </Button>
               <div>

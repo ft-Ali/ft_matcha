@@ -9,8 +9,10 @@ import  Switch  from "./UI/Switch"
 import  Slider  from "./UI/Slider"
 import  {Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./UI/Select"
 import  Separator  from "./UI/Separator"
+import { useNavigate } from 'react-router-dom';
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   const [settings, setSettings] = useState({
     // Paramètres de compte
     email: "emma.dubois@email.com",
@@ -44,7 +46,7 @@ export default function SettingsPage() {
     autoPlay: false,
   })
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key, value) => {
     setSettings((prev) => ({ ...prev, [key]: value }))
   }
 
@@ -90,7 +92,7 @@ export default function SettingsPage() {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                 ← Retour
               </Button>
               <div>
