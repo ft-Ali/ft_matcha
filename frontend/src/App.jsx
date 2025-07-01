@@ -2,8 +2,8 @@ import React from 'react';
 import Profile from './components/profil';
 import Home from './components/home';
 import SettingsPage from './components/settings';
-import MessagesPage from './components/like';
-import LikesPage from './components/message';
+import MessagesPage from './components/message';
+import LikesPage from './components/like';
 import DashboardPage from './components/dashboard';
 import { Routes, Route } from 'react-router-dom';
 
