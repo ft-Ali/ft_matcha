@@ -16,19 +16,19 @@ import { useNavigate } from 'react-router-dom';
             name: "Marie & Lucas",
             pets: "Golden Retriever & Husky",
             story: "Nos chiens se sont rencontrés avant nous ! Maintenant nous formons une famille de 4.",
-            image: "/placeholder.svg?height=300&width=300",
+            image: "/image/mbappe.png",
             },
             {
             name: "Sophie & Thomas",
             pets: "2 Chats Maine Coon",
             story: "Grâce à PetMatch, j'ai trouvé quelqu'un qui comprend ma passion pour les félins.",
-            image: "/placeholder.svg?height=300&width=300",
+            image: "/image/mbappe.png",
             },
             {
             name: "Alex & Emma",
             pets: "Lapin & Cochon d'Inde",
             story: "Qui aurait cru que nos petits compagnons nous rapprocheraient autant ?",
-            image: "/placeholder.svg?height=300&width=300",
+            image: "/image/mbappe.png",
             },
         ]
         useEffect(() => {
@@ -150,37 +150,7 @@ import { useNavigate } from 'react-router-dom';
             </div>
           </div>
 
-          <div className="relative">
-            <div className="relative z-10">
-              <img
-                src="/placeholder.svg?height=600&width=500"
-                alt="Couple heureux avec leurs animaux"
-                className="w-full max-w-lg mx-auto rounded-3xl shadow-2xl"
-              />
-            </div>
-            {/* Floating cards */}
-            <div className="absolute -top-4 -left-4 bg-white rounded-2xl p-4 shadow-lg animate-float">
-              <div className="flex items-center space-x-3">
-                <img src="/placeholder.svg?height=40&width=40" alt="User" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="text-sm font-semibold">Emma, 28</div>
-                  <div className="text-xs text-gray-500">🐕 Golden Retriever</div>
-                </div>
-                <div className="text-red-500">❤️</div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-lg animate-float delay-1000">
-              <div className="flex items-center space-x-3">
-                <img src="/placeholder.svg?height=40&width=40" alt="User" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="text-sm font-semibold">Lucas, 31</div>
-                  <div className="text-xs text-gray-500">🐱 Maine Coon</div>
-                </div>
-                <div className="text-red-500">❤️</div>
-              </div>
-            </div>
-          </div>
+   
         </div>
       </section>
 
@@ -287,7 +257,6 @@ import { useNavigate } from 'react-router-dom';
                 ))}
               </div>
             </div>
-
             {/* Carousel indicators */}
             <div className="flex justify-center space-x-2 mt-8">
               {testimonials.map((_, index) => (
@@ -305,37 +274,7 @@ import { useNavigate } from 'react-router-dom';
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white">
-        ???????
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div className="group">
-              <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                50K+
-              </div>
-              <p className="text-gray-600 font-medium">Couples Formés</p>
-            </div>
-            <div className="group">
-              <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-500 to-indigo-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                200K+
-              </div>
-              <p className="text-gray-600 font-medium">Utilisateurs Actifs</p>
-            </div>
-            <div className="group">
-              <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-500 to-pink-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                95%
-              </div>
-              <p className="text-gray-600 font-medium">Satisfaction</p>
-            </div>
-            <div className="group">
-              <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-500 to-indigo-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                50+
-              </div>
-              <p className="text-gray-600 font-medium">Pays</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA Final avec design moderne */}
       <section className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 text-white relative overflow-hidden">

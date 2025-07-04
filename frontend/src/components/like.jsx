@@ -20,7 +20,7 @@ export default function LikesPage() {
       name: "Sophie Martin",
       age: 26,
       distance: "3 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐕 Golden Retriever"],
       isOnline: true,
       likedAt: "Il y a 2h",
@@ -32,7 +32,7 @@ export default function LikesPage() {
       name: "Lucas Dubois",
       age: 29,
       distance: "7 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐱 Maine Coon", "🐱 Persan"],
       isOnline: false,
       likedAt: "Il y a 5h",
@@ -44,7 +44,7 @@ export default function LikesPage() {
       name: "Marie Leroy",
       age: 31,
       distance: "12 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐰 Lapin nain"],
       isOnline: true,
       likedAt: "Il y a 1j",
@@ -59,7 +59,7 @@ export default function LikesPage() {
       name: "Thomas Bernard",
       age: 33,
       distance: "5 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐕 Husky"],
       isOnline: false,
       likedAt: "Il y a 3h",
@@ -71,7 +71,7 @@ export default function LikesPage() {
       name: "Julie Moreau",
       age: 27,
       distance: "9 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐦 Perroquet"],
       isOnline: true,
       likedAt: "Il y a 1j",
@@ -86,7 +86,7 @@ export default function LikesPage() {
       name: "Alex Petit",
       age: 28,
       distance: "4 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐕 Border Collie"],
       isOnline: true,
       likedAt: "Il y a 30min",
@@ -99,7 +99,7 @@ export default function LikesPage() {
       name: "Emma Rousseau",
       age: 25,
       distance: "6 km",
-      photo: "/placeholder.svg?height=300&width=300",
+      photo: "/image/mbappe.png",
       pets: ["🐱 Chat de gouttière", "🐠 Poissons"],
       isOnline: false,
       likedAt: "Il y a 2j",
@@ -223,7 +223,7 @@ export default function LikesPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
-                ← Retour
+                ← Retour au dashboard
               </Button>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">

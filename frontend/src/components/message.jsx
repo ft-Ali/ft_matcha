@@ -1,4 +1,3 @@
-"use client"
 
 import React from "react"
 
@@ -22,7 +21,7 @@ const [selectedChat, setSelectedChat] = useState(1)
     {
       id: 1,
       name: "Alex Petit",
-      photo: "/placeholder.svg?height=50&width=50",
+      photo: "/image/mbappe.pngheight=50&width=50",
       lastMessage: "Salut ! Ton Golden Retriever est adorable 🐕",
       lastMessageTime: "14:30",
       unreadCount: 2,
@@ -32,7 +31,7 @@ const [selectedChat, setSelectedChat] = useState(1)
     {
       id: 2,
       name: "Emma Rousseau",
-      photo: "/placeholder.svg?height=50&width=50",
+      photo: "/image/mbappe.pngheight=50&width=50",
       lastMessage: "Merci pour le match ! 💕",
       lastMessageTime: "12:15",
       unreadCount: 0,
@@ -42,7 +41,7 @@ const [selectedChat, setSelectedChat] = useState(1)
     {
       id: 3,
       name: "Sophie Martin",
-      photo: "/placeholder.svg?height=50&width=50",
+      photo: "/image/mbappe.pngheight=50&width=50",
       lastMessage: "On pourrait se promener avec nos chiens ?",
       lastMessageTime: "Hier",
       unreadCount: 1,
@@ -52,7 +51,7 @@ const [selectedChat, setSelectedChat] = useState(1)
     {
       id: 4,
       name: "Lucas Dubois",
-      photo: "/placeholder.svg?height=50&width=50",
+      photo: "/image/mbappe.pngheight=50&width=50",
       lastMessage: "Tes photos de chats sont magnifiques !",
       lastMessageTime: "Hier",
       unreadCount: 0,

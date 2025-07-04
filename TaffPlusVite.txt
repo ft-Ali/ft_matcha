@@ -1,0 +1,2 @@
+revoir les chemins de redirection (messages, profile, settings)
+clean un peu le code 
