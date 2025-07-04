@@ -1,8 +1,9 @@
+
+
 "use client"
 
-import React from "react"
-
 import { useState, useRef, useEffect } from "react"
+import { useNavigate } from 'react-router-dom';
 import Button from "./UI/Button";
 import Input from "./UI/Input";
 import Label from "./UI/Label";
@@ -19,579 +20,581 @@ import {
   SelectValue,
 } from "./UI/Select";
 import Separator from "./UI/Separator";
-import Tag from "./UI/Tag";             // ⇦ petit composant pill “#tag”
-import Textarea from "./UI/Textarea"
-export default function ProfilePage() {
-  const [profile, setProfile] = useState({
-    name: "Emma Dubois",
-    age: 28,
-    gender: "female",
-    sexualPreference: "men",
-    biography:
-      "Passionnée d'animaux et de nature, toujours prête pour de nouvelles aventures avec mes compagnons à quatre pattes ! J'adore la randonnée, la photographie animalière et découvrir de nouveaux endroits avec mes animaux.",
-    location: "Paris, France",
-    profession: "Vétérinaire",
-    interests: ["randonnée", "photographie", "voyage", "cuisine", "yoga", "lecture", "nature", "vélo"],
-    photos: [
-      { id: 1, url: "/placeholder.svg?height=300&width=300", isProfile: true },
-      { id: 2, url: "/placeholder.svg?height=300&width=300", isProfile: false },
-      { id: 3, url: "/placeholder.svg?height=300&width=300", isProfile: false },
-    ],
-    pets: [
-      { type: "dog", breed: "Golden Retriever", name: "Max" },
-      { type: "cat", breed: "Maine Coon", name: "Luna" },
-    ],
+// import Tag from "./UI/Tag";             // ⇦ petit composant pill “#tag”
+// import Textarea from "./UI/TextArea"
+
+export default function AccountSettingsPage() {
+  const navigate = useNavigate();
+  const [accountData, setAccountData] = useState({
+    email: "emma.dubois@email.com",
+    phone: "+33 6 12 34 56 78",
+    currentPassword: "123",
+    newPassword: "",// import Tag from "./UI/Tag";             // ⇦ petit composant pill “#tag”
+// import Textarea from "./UI/Textarea"
+    confirmPassword: "",
   })
 
-  const [fameRating, setFameRating] = useState(4.2)
-  const [profileCompletion, setProfileCompletion] = useState(85)
-  const [newInterest, setNewInterest] = useState("")
-  const [isEditing, setIsEditing] = useState(false)
-  const fileInputRef = useRef(null)
+  const [isEditing, setIsEditing] = useState({
+    email: false,
+    phone: false,
+    password: false,
+  })
 
-  // Tags d'intérêts prédéfinis populaires
-  const popularInterests = [
-    "randonnée",
-    "photographie",
-    "voyage",
-    "cuisine",
-    "yoga",
-    "lecture",
-    "nature",
-    "vélo",
-    "vegan",
-    "geek",
-    "piercing",
-    "tattoo",
-    "musique",
-    "danse",
-    "sport",
-    "art",
-    "cinéma",
-    "théâtre",
-    "gaming",
-    "tech",
-    "mode",
-    "fitness",
-    "méditation",
-    "écologie",
-  ]
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
+  const [deleteConfirmation, setDeleteConfirmation] = useState("")
+  const [notifications, setNotifications] = useState({
+    emailChanged: false,
+    phoneChanged: false,
+    passwordChanged: false,
+  })
 
-  const handleProfileUpdate = (field, value) => {
-    setProfile((prev) => ({ ...prev, [field]: value }))
+  const [securityInfo, setSecurityInfo] = useState({
+    lastLogin: "Aujourd'hui à 14:32",
+    loginLocation: "Paris, France",
+    deviceInfo: "Chrome sur Windows",
+    accountCreated: "15 janvier 2024",
+    emailVerified: true,
+    phoneVerified: true,
+    twoFactorEnabled: false,
+  })
+
+  const handleInputChange = (field, value) => {
+    setAccountData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleAddInterest = (interest) => {
-    if (interest && !profile.interests.includes(interest.toLowerCase())) {
-      setProfile((prev) => ({
+  const handleSaveEmail = () => {
+    // Validation email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(accountData.email)) {
+      alert("Veuillez entrer une adresse email valide")
+      return
+    }
+
+    // Simulation de sauvegarde
+    setIsEditing((prev) => ({ ...prev, email: false }))
+    setNotifications((prev) => ({ ...prev, emailChanged: true }))
+    setTimeout(() => setNotifications((prev) => ({ ...prev, emailChanged: false })), 3000)
+    console.log("Email updated:", accountData.email)
+  }
+
+  const handleSavePhone = () => {
+    // Validation téléphone
+    const phoneRegex = /^(\+33|0)[1-9](\d{8})$/
+    if (!phoneRegex.test(accountData.phone.replace(/\s/g, ""))) {
+      alert("Veuillez entrer un numéro de téléphone français valide")
+      return
+    }
+
+    setIsEditing((prev) => ({ ...prev, phone: false }))
+    setNotifications((prev) => ({ ...prev, phoneChanged: true }))
+    setTimeout(() => setNotifications((prev) => ({ ...prev, phoneChanged: false })), 3000)
+    console.log("Phone updated:", accountData.phone)
+  }
+
+  const handleSavePassword = () => {
+    // Validations mot de passe
+    if (accountData.currentPassword.length < 1) {
+      alert("Veuillez entrer votre mot de passe actuel")
+      return
+    }
+
+    if (accountData.newPassword.length < 8) {
+      alert("Le nouveau mot de passe doit contenir au moins 8 caractères")
+      return
+    }
+
+    if (accountData.newPassword !== accountData.confirmPassword) {
+      alert("Les mots de passe ne correspondent pas")
+      return
+    }
+
+    // Simulation de vérification du mot de passe actuel
+    if (accountData.currentPassword !== "motdepasse123") {
+      alert("Mot de passe actuel incorrect")
+      return
+    }
+
+    setIsEditing((prev) => ({ ...prev, password: false }))
+    setNotifications((prev) => ({ ...prev, passwordChanged: true }))
+    setTimeout(() => setNotifications((prev) => ({ ...prev, passwordChanged: false })), 3000)
+
+    // Réinitialiser les champs
+    setAccountData((prev) => ({
+      ...prev,
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    }))
+
+    console.log("Password updated")
+  }
+
+  const handleLogout = () => {
+    // Simulation de déconnexion
+    console.log("User logged out")
+    alert("Vous avez été déconnecté avec succès")
+    setShowLogoutDialog(false)
+    // Redirection vers la page de connexion
+    // window.location.href = "/login"
+  }
+
+  const handleDeleteAccount = () => {
+    if (deleteConfirmation !== "SUPPRIMER") {
+      alert("Veuillez taper 'SUPPRIMER' pour confirmer")
+      return
+    }
+
+    // Simulation de suppression
+    console.log("Account deleted")
+    alert("Votre compte a été supprimé définitivement")
+    setShowDeleteDialog(false)
+    // Redirection vers la page d'accueil
+    // window.location.href = "/"
+  }
+
+  const cancelEdit = (field) => {
+    setIsEditing((prev) => ({ ...prev, [field]: false }))
+    // Réinitialiser les valeurs si nécessaire
+    if (field === "password") {
+      setAccountData((prev) => ({
         ...prev,
-        interests: [...prev.interests, interest.toLowerCase()],
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
       }))
-      setNewInterest("")
     }
   }
-
-  const handleRemoveInterest = (interest) => {
-    setProfile((prev) => ({
-      ...prev,
-      interests: prev.interests.filter((i) => i !== interest),
-    }))
-  }
-
-  const handlePhotoUpload = (event) => {
-    const files = event.target.files
-    if (files && files.length > 0) {
-      // Simulation d'upload de photo
-      const newPhoto = {
-        id: Date.now(),
-        url: URL.createObjectURL(files[0]),
-        isProfile: profile.photos.length === 0,
-      }
-
-      if (profile.photos.length < 5) {
-        setProfile((prev) => ({
-          ...prev,
-          photos: [...prev.photos, newPhoto],
-        }))
-      }
-    }
-  }
-
-  const handleSetProfilePhoto = (photoId) => {
-    setProfile((prev) => ({
-      ...prev,
-      photos: prev.photos.map((photo) => ({
-        ...photo,
-        isProfile: photo.id === photoId,
-      })),
-    }))
-  }
-
-  const handleRemovePhoto = (photoId) => {
-    setProfile((prev) => ({
-      ...prev,
-      photos: prev.photos.filter((photo) => photo.id !== photoId),
-    }))
-  }
-
-  const handleSaveProfile = () => {
-    setIsEditing(false)
-    // Logique de sauvegarde
-    console.log("Profile saved:", profile)
-    alert("Profil sauvegardé avec succès !")
-  }
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleAddInterest(newInterest)
-    }
-  }
-
-  const profilePhoto = profile.photos.find((photo) => photo.isProfile)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-lg border-b border-purple-100 sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                 ← Retour au dashboard
               </Button>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  Mon Profil
+                  Paramètres du compte
                 </h1>
-                <p className="text-sm text-gray-600">Gérez vos informations personnelles</p>
+                <p className="text-sm text-gray-600">Gérez vos informations de connexion et sécurité</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              {!isEditing ? (
-                <Button
-                  onClick={() => setIsEditing(true)}
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700"
-                >
-                  ✏️ Modifier le profil
-                </Button>
-              ) : (
-                <div className="flex space-x-2">
-                  <Button
-                    variant="outline"
-                    onClick={() => setIsEditing(false)}
-                    className="border-gray-300 text-gray-600"
-                  >
-                    Annuler
-                  </Button>
-                  <Button
-                    onClick={handleSaveProfile}
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700"
-                  >
-                    💾 Sauvegarder
-                  </Button>
-                </div>
-              )}
-            </div>
+            <Badge className="bg-green-100 text-green-700 border-green-200">Compte vérifié ✓</Badge>
           </div>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Colonne gauche - Aperçu du profil */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Photo de profil et infos principales */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100 overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative">
-                  <div className="h-64 bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
-                    {profilePhoto ? (
-                      <img
-                        src={profilePhoto.url || "/placeholder.svg"}
-                        alt="Photo de profil"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="text-white text-6xl">📷</div>
-                    )}
-                  </div>
+      <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+        {/* Notifications */}
+        {(notifications.emailChanged || notifications.phoneChanged || notifications.passwordChanged) && (
+          <alert className="bg-green-50 border-green-200 text-green-800">
+            <alertdescription className="flex items-center space-x-2">
+              <span className="text-green-600">✓</span>
+              <span>
+                {notifications.emailChanged && "Email mis à jour avec succès"}
+                {notifications.phoneChanged && "Numéro de téléphone mis à jour avec succès"}
+                {notifications.passwordChanged && "Mot de passe modifié avec succès"}
+              </span>
+            </alertdescription>
+          </alert>
+        )}
 
-                  {/* Fame Rating */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                    <span className="text-yellow-500 text-lg">⭐</span>
-                    <span className="font-bold text-gray-800">{fameRating.toFixed(1)}</span>
-                  </div>
-
-                  {/* Statut en ligne */}
-                  <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full flex items-center space-x-1">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                    <span>En ligne</span>
-                  </div>
+        {/* Informations de sécurité */}
+        <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-gray-800">
+              <span className="text-xl">🛡️</span>
+              <span>Sécurité du compte</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Dernière connexion</span>
+                  <span className="font-medium">{securityInfo.lastLogin}</span>
                 </div>
-
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    {profile.name}, {profile.age}
-                  </h2>
-                  <p className="text-gray-600 mb-4">📍 {profile.location}</p>
-                  <p className="text-gray-600 mb-4">💼 {profile.profession}</p>
-                  {/* Animaux */}
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-gray-800">🐾 Mes compagnons</h3>
-                    {profile.pets.map((pet, index) => (
-                      <div key={index} className="flex items-center space-x-2 text-sm">
-                        <span>{pet.type === "dog" ? "🐕" : "🐱"}</span>
-                        <span className="text-gray-700">
-                          {pet.name} ({pet.breed})
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Localisation</span>
+                  <span className="font-medium">{securityInfo.loginLocation}</span>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Fame Rating détaillé */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-gray-800">
-                  <span className="text-xl">⭐</span>
-                  <span>Fame Rating</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-yellow-500 mb-2">{fameRating.toFixed(1)}</div>
-                  <div className="flex justify-center space-x-1 mb-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span
-                        key={star}
-                        className={`text-2xl ${star <= Math.floor(fameRating) ? "text-yellow-500" : "text-gray-300"}`}
-                      >
-                        ⭐
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-sm text-gray-600">Basé sur 47 évaluations</p>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Appareil</span>
+                  <span className="font-medium">{securityInfo.deviceInfo}</span>
                 </div>
-
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span>Popularité du profil</span>
-                    <span className="font-medium">Élevée</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Activité récente</span>
-                    <span className="font-medium">Très active</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Taux de réponse</span>
-                    <span className="font-medium">92%</span>
-                  </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Compte créé</span>
+                  <span className="font-medium">{securityInfo.accountCreated}</span>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Colonne droite - Formulaire d'édition */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Informations personnelles */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-gray-800">
-                  <span className="text-xl">👤</span>
-                  <span>Informations personnelles     <br/>  Ajouter la modification des animaux
-                  </span> 
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name" className="text-gray-700 font-medium">
-                      Nom complet
-                    </Label>
-                    <Input
-                      id="name"
-                      value={profile.name}
-                      onChange={(e) => handleProfileUpdate("name", e.target.value)}
-                      disabled={!isEditing}
-                      className="mt-2 border-purple-200 focus:border-purple-500"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="age" className="text-gray-700 font-medium">
-                      Âge
-                    </Label>
-                    <Input
-                      id="age"
-                      type="number"
-                      value={profile.age}
-                      onChange={(e) => handleProfileUpdate("age", Number.parseInt(e.target.value))}
-                      disabled={!isEditing}
-                      className="mt-2 border-purple-200 focus:border-purple-500"
-                    />
-                  </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Email vérifié</span>
+                  <Badge
+                    className={securityInfo.emailVerified ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}
+                  >
+                    {securityInfo.emailVerified ? "✓ Vérifié" : "✗ Non vérifié"}
+                  </Badge>
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label className="text-gray-700 font-medium">Genre</Label>
-                    <Select
-                      value={profile.gender}
-                      onValueChange={(value) => handleProfileUpdate("gender", value)}
-                      disabled={!isEditing}
-                    >
-                      <SelectTrigger className="mt-2 border-purple-200">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="female">👩 Femme</SelectItem>
-                        <SelectItem value="male">👨 Homme</SelectItem>
-                        <SelectItem value="non-binary">⚧️ Non-binaire</SelectItem>
-                        <SelectItem value="other">🌈 Autre</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label className="text-gray-700 font-medium">Préférence sexuelle</Label>
-                    <Select
-                      value={profile.sexualPreference}
-                      onValueChange={(value) => handleProfileUpdate("sexualPreference", value)}
-                      disabled={!isEditing}
-                    >
-                      <SelectTrigger className="mt-2 border-purple-200">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="men">👨 Hommes</SelectItem>
-                        <SelectItem value="women">👩 Femmes</SelectItem>
-                        <SelectItem value="both">👫 Les deux</SelectItem>
-                        <SelectItem value="all">🌈 Tous</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Téléphone vérifié</span>
+                  <Badge
+                    className={securityInfo.phoneVerified ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}
+                  >
+                    {securityInfo.phoneVerified ? "✓ Vérifié" : "✗ Non vérifié"}
+                  </Badge>
                 </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="location" className="text-gray-700 font-medium">
-                      Localisation
-                    </Label>
-                    <Input
-                      id="location"
-                      value={profile.location}
-                      onChange={(e) => handleProfileUpdate("location", e.target.value)}
-                      disabled={!isEditing}
-                      className="mt-2 border-purple-200 focus:border-purple-500"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="profession" className="text-gray-700 font-medium">
-                      Profession
-                    </Label>
-                    <Input
-                      id="profession"
-                      value={profile.profession}
-                      onChange={(e) => handleProfileUpdate("profession", e.target.value)}
-                      disabled={!isEditing}
-                      className="mt-2 border-purple-200 focus:border-purple-500"
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Biographie */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-gray-800">
-                  <span className="text-xl">📝</span>
-                  <span>Biographie</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Label htmlFor="biography" className="text-gray-700 font-medium">
-                  Parlez-nous de vous et de votre passion pour les animaux
-                </Label>
-                <Textarea
-                  id="biography"
-                  value={profile.biography}
-                  onChange={(e) => handleProfileUpdate("biography", e.target.value)}
-                  disabled={!isEditing}
-                  className="mt-2 border-purple-200 focus:border-purple-500 min-h-[120px]"
-                  placeholder="Décrivez-vous, vos passions, ce que vous recherchez..."
-                />
-                <p className="text-sm text-gray-500 mt-2">{profile.biography.length}/500 caractères</p>
-              </CardContent>
-            </Card>
-
-            {/* Centres d'intérêt */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-gray-800">
-                  <span className="text-xl">🏷️</span>
-                  <span>Centres d'intérêt</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {/* Tags actuels */}
+        {/* Adresse email */}
+        <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-gray-800">
+              <span className="text-xl">📧</span>
+              <span>Adresse email</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {!isEditing.email ? (
+              <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-gray-700 font-medium mb-3 block">Vos intérêts</Label>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.interests.map((interest) => (
-                      <Badge
-                        key={interest}
-                        variant="secondary"
-                        className="bg-gradient-to-r from-pink-100 to-purple-100 text-purple-700 border border-purple-200 px-3 py-1"
-                      >
-                        #{interest}
-                        {isEditing && (
-                          <button
-                            onClick={() => handleRemoveInterest(interest)}
-                            className="ml-2 text-red-500 hover:text-red-700"
-                          >
-                            ×
-                          </button>
-                        )}
-                      </Badge>
-                    ))}
-                  </div>
+                  <p className="font-medium text-gray-800">{accountData.email}</p>
+                  <p className="text-sm text-gray-600">Utilisée pour la connexion et les notifications</p>
                 </div>
+                <Button
+                  onClick={() => setIsEditing((prev) => ({ ...prev, email: true }))}
+                  variant="outline"
+                  className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                >
+                  ✏️ Modifier
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="email" className="text-gray-700 font-medium">
+                    Nouvelle adresse email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={accountData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    className="mt-2 border-purple-200 focus:border-purple-500"
+                    placeholder="nouvelle@email.com"
+                  />
+                </div>
+                <div className="flex space-x-3">
+                  <Button
+                    onClick={handleSaveEmail}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700"
+                  >
+                    💾 Sauvegarder
+                  </Button>
+                  <Button
+                    onClick={() => cancelEdit("email")}
+                    variant="outline"
+                    className="border-gray-300 text-gray-600"
+                  >
+                    Annuler
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-                {isEditing && (
-                  <>
-                    <Separator />
+        {/* Numéro de téléphone */}
+        <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-gray-800">
+              <span className="text-xl">📱</span>
+              <span>Numéro de téléphone</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {!isEditing.phone ? (
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-800">{accountData.phone}</p>
+                  <p className="text-sm text-gray-600">Utilisé pour la vérification et la sécurité</p>
+                </div>
+                <Button
+                  onClick={() => setIsEditing((prev) => ({ ...prev, phone: true }))}
+                  variant="outline"
+                  className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                >
+                  ✏️ Modifier
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="phone" className="text-gray-700 font-medium">
+                    Nouveau numéro de téléphone
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={accountData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    className="mt-2 border-purple-200 focus:border-purple-500"
+                    placeholder="+33 6 12 34 56 78"
+                  />
+                </div>
+                <div className="flex space-x-3">
+                  <Button
+                    onClick={handleSavePhone}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700"
+                  >
+                    💾 Sauvegarder
+                  </Button>
+                  <Button
+                    onClick={() => cancelEdit("phone")}
+                    variant="outline"
+                    className="border-gray-300 text-gray-600"
+                  >
+                    Annuler
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-                    {/* Ajouter un nouvel intérêt */}
-                    <div>
-                      <Label className="text-gray-700 font-medium mb-3 block">Ajouter un intérêt</Label>
-                      <div className="flex space-x-2">
-                        <Input
-                          value={newInterest}
-                          onChange={(e) => setNewInterest(e.target.value)}
-                          placeholder="Tapez un intérêt..."
-                          className="border-purple-200 focus:border-purple-500"
-                          onKeyPress={handleKeyPress}
-                        />
-                        <Button
-                          onClick={() => handleAddInterest(newInterest)}
-                          className="bg-gradient-to-r from-pink-500 to-purple-600 text-white"
-                        >
-                          Ajouter
-                        </Button>
-                      </div>
-                    </div>
+        {/* Mot de passe */}
+        <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-gray-800">
+              <span className="text-xl">🔐</span>
+              <span>Mot de passe</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {!isEditing.password ? (
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-800">••••••••••••</p>
+                  <p className="text-sm text-gray-600">Dernière modification il y a 2 mois</p>
+                </div>
+                <Button
+                  onClick={() => setIsEditing((prev) => ({ ...prev, password: true }))}
+                  variant="outline"
+                  className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                >
+                  🔑 Changer le mot de passe
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="currentPassword" className="text-gray-700 font-medium">
+                    Mot de passe actuel
+                  </Label>
+                  <Input
+                    id="currentPassword"
+                    type="password"
+                    value={accountData.currentPassword}
+                    onChange={(e) => handleInputChange("currentPassword", e.target.value)}
+                    className="mt-2 border-purple-200 focus:border-purple-500"
+                    placeholder="Votre mot de passe actuel"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="newPassword" className="text-gray-700 font-medium">
+                    Nouveau mot de passe
+                  </Label>
+                  <Input
+                    id="newPassword"
+                    type="password"
+                    value={accountData.newPassword}
+                    onChange={(e) => handleInputChange("newPassword", e.target.value)}
+                    className="mt-2 border-purple-200 focus:border-purple-500"
+                    placeholder="Nouveau mot de passe (min. 8 caractères)"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="confirmPassword" className="text-gray-700 font-medium">
+                    Confirmer le nouveau mot de passe
+                  </Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    value={accountData.confirmPassword}
+                    onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                    className="mt-2 border-purple-200 focus:border-purple-500"
+                    placeholder="Confirmez votre nouveau mot de passe"
+                  />
+                </div>
+                <div className="flex space-x-3">
+                  <Button
+                    onClick={handleSavePassword}
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700"
+                  >
+                    🔐 Changer le mot de passe
+                  </Button>
+                  <Button
+                    onClick={() => cancelEdit("password")}
+                    variant="outline"
+                    className="border-gray-300 text-gray-600"
+                  >
+                    Annuler
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-                    {/* Suggestions d'intérêts populaires */}
-                    <div>
-                      <Label className="text-gray-700 font-medium mb-3 block">Suggestions populaires</Label>
-                      <div className="flex flex-wrap gap-2">
-                        {popularInterests
-                          .filter((interest) => !profile.interests.includes(interest))
-                          .slice(0, 12)
-                          .map((interest) => (
-                            <button
-                              key={interest}
-                              onClick={() => handleAddInterest(interest)}
-                              className="px-3 py-1 text-sm border border-purple-200 rounded-full hover:bg-purple-50 hover:border-purple-300 transition-colors"
-                            >
-                              #{interest}
-                            </button>
-                          ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </CardContent>
-            </Card>
+        <Separator className="my-8" />
 
-            {/* Galerie de photos */}
-            <Card className="bg-white/60 backdrop-blur-sm border-purple-100">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-gray-800">
-                    <span className="text-xl">📷</span>
-                    <span>Photos ({profile.photos.length}/5)</span>
-                  </div>
-                  {isEditing && profile.photos.length < 5 && (
+        {/* Actions de compte */}
+        <Card className="bg-white/60 backdrop-blur-sm border-red-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-red-700">
+              <span className="text-xl">⚠️</span>
+              <span>Actions de compte</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Déconnexion */}
+            <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg border border-orange-200">
+              <div>
+                <h3 className="font-medium text-orange-800">Se déconnecter</h3>
+                <p className="text-sm text-orange-600">Déconnectez-vous de votre compte sur cet appareil</p>
+              </div>
+              <dialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+                <dialogtrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="border-orange-300 text-orange-600 hover:bg-orange-50 bg-transparent"
+                  >
+                    🚪 Se déconnecter
+                  </Button>
+                </dialogtrigger>
+                <dialogcontent className="bg-white">
+                  <dialogheader>
+                    <dialogtitle className="text-orange-800">Confirmer la déconnexion</dialogtitle>
+                    <dialogdescription>
+                      Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter pour accéder à votre
+                      compte.
+                    </dialogdescription>
+                  </dialogheader>
+                  <dialogfooter>
                     <Button
-                      onClick={() => fileInputRef.current?.click()}
                       variant="outline"
-                      className="border-purple-300 text-purple-600 hover:bg-purple-50"
+                      onClick={() => setShowLogoutDialog(false)}
+                      className="border-gray-300 text-gray-600"
                     >
-                      + Ajouter une photo
+                      Annuler
                     </Button>
-                  )}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handlePhotoUpload}
-                  className="hidden"
-                />
+                    <Button onClick={handleLogout} className="bg-orange-500 hover:bg-orange-600 text-white">
+                      🚪 Se déconnecter
+                    </Button>
+                  </dialogfooter>
+                </dialogcontent>
+              </dialog>
+            </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {profile.photos.map((photo) => (
-                    <div key={photo.id} className="relative group">
-                      <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                        <img
-                          src={photo.url || "/placeholder.svg"}
-                          alt="Photo de profil"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-
-                      {/* Badge photo de profil */}
-                      {photo.isProfile && (
-                        <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-                          Profil
-                        </div>
-                      )}
-
-                      {/* Actions */}
-                      {isEditing && (
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center space-x-2">
-                          {!photo.isProfile && (
-                            <Button
-                              size="sm"
-                              onClick={() => handleSetProfilePhoto(photo.id)}
-                              className="bg-green-500 hover:bg-green-600 text-white"
-                            >
-                              Profil
-                            </Button>
-                          )}
-                          <Button size="sm" variant="destructive" onClick={() => handleRemovePhoto(photo.id)}>
-                            Supprimer
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-
-                  {/* Placeholder pour ajouter des photos */}
-                  {isEditing && profile.photos.length < 5 && (
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      className="aspect-square rounded-lg border-2 border-dashed border-purple-300 hover:border-purple-500 flex items-center justify-center text-purple-500 hover:text-purple-700 transition-colors"
+            {/* Suppression de compte */}
+            <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+              <div>
+                <h3 className="font-medium text-red-800">Supprimer le compte</h3>
+                <p className="text-sm text-red-600">Supprimez définitivement votre compte et toutes vos données</p>
+              </div>
+              <dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+                <dialogtrigger asChild>
+                  <Button variant="outline" className="border-red-300 text-red-600 hover:bg-red-50 bg-transparent">
+                    🗑️ Supprimer le compte
+                  </Button>
+                </dialogtrigger>
+                <dialogcontent className="bg-white">
+                  <dialogheader>
+                    <dialogtitle className="text-red-800">⚠️ Supprimer définitivement le compte</dialogtitle>
+                    <dialogdescription className="space-y-3">
+                      <p>
+                        <strong>Cette action est irréversible !</strong> En supprimant votre compte, vous perdrez :
+                      </p>
+                      <ul className="list-disc list-inside space-y-1 text-sm">
+                        <li>Tous vos matchs et conversations</li>
+                        <li>Vos photos et informations de profil</li>
+                        <li>Votre historique d'activité</li>
+                        <li>Vos paramètres et préférences</li>
+                      </ul>
+                      <p className="text-red-600 font-medium">
+                        Pour confirmer, tapez <strong>"SUPPRIMER"</strong> dans le champ ci-dessous :
+                      </p>
+                    </dialogdescription>
+                  </dialogheader>
+                  <div className="py-4">
+                    <Input
+                      value={deleteConfirmation}
+                      onChange={(e) => setDeleteConfirmation(e.target.value)}
+                      placeholder="Tapez SUPPRIMER pour confirmer"
+                      className="border-red-200 focus:border-red-500"
+                    />
+                  </div>
+                  <dialogfooter>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setShowDeleteDialog(false)
+                        setDeleteConfirmation("")
+                      }}
+                      className="border-gray-300 text-gray-600"
                     >
-                      <div className="text-center">
-                        <div className="text-3xl mb-2">📷</div>
-                        <div className="text-sm">Ajouter</div>
-                      </div>
-                    </button>
-                  )}
-                </div>
+                      Annuler
+                    </Button>
+                    <Button
+                      onClick={handleDeleteAccount}
+                      disabled={deleteConfirmation !== "SUPPRIMER"}
+                      className="bg-red-500 hover:bg-red-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      🗑️ Supprimer définitivement
+                    </Button>
+                  </dialogfooter>
+                </dialogcontent>
+              </dialog>
+            </div>
+          </CardContent>
+        </Card>
 
-                <p className="text-sm text-gray-500 mt-4">
-                  💡 Conseil : Ajoutez des photos avec vos animaux pour attirer plus de matchs !
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        {/* Conseils de sécurité */}
+        <Card className="bg-blue-50 border-blue-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-blue-800">
+              <span className="text-xl">💡</span>
+              <span>Conseils de sécurité</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-blue-700">
+            <ul className="space-y-2">
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-500 mt-0.5">•</span>
+                <span>Utilisez un mot de passe unique et complexe pour votre compte PetMatch</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-500 mt-0.5">•</span>
+                <span>Ne partagez jamais vos identifiants de connexion avec qui que ce soit</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-500 mt-0.5">•</span>
+                <span>Déconnectez-vous toujours après utilisation sur un appareil partagé</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <span className="text-blue-500 mt-0.5">•</span>
+                <span>Vérifiez régulièrement vos informations de connexion</span>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

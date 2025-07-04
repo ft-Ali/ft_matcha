@@ -28,7 +28,6 @@ const navigate = useNavigate();
   const userProfile = {
     name: "Fimesh",
     photo: "/image/ficello.png",
-    completionRate: 85,
     lastActive: "En ligne",
   }
 
@@ -44,7 +43,7 @@ const navigate = useNavigate();
       bgGradient: "from-pink-50 to-rose-50",
       stats: "12 nouveaux profils",
       action: "Commencer à explorer",
-      href: "/profile",
+      href: "/discover",
     },
     {
       id: "likes",
@@ -80,7 +79,6 @@ const navigate = useNavigate();
       icon: "⚙️",
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-emerald-50 to-teal-50",
-      stats: "Profil à 85% complet",
       action: "Modifier les paramètres",
       href: "/settings",
     },
@@ -93,21 +91,21 @@ const navigate = useNavigate();
       type: "like",
       message: "Sophie vous a liké",
       time: "Il y a 5 min",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "/image/mbappe.png",
     },
     {
       id: 2,
       type: "match",
       message: "Nouveau match avec Alex !",
       time: "Il y a 15 min",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "/image/mbappe.png",
     },
     {
       id: 3,
       type: "message",
       message: "Lucas vous a envoyé un message",
       time: "Il y a 1h",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: "/image/mbappe.png",
     },
   ]
   const handleSectionClick = (href) => {
@@ -144,19 +142,7 @@ const navigate = useNavigate();
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="text-right">
-                <p className="text-sm text-gray-600">Profil complété</p>
-                <div className="flex items-center space-x-2">
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-pink-500 to-purple-600 rounded-full transition-all duration-500"
-                      style={{ width: `${userProfile.completionRate}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-semibold text-purple-600">{userProfile.completionRate}%</span>
-                </div>
-              </div>
-              <Button variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50">
+                      <Button onClick={() => navigate('/profile')} variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50">
                 👤 Mon profil
               </Button>
             </div>
@@ -266,7 +252,7 @@ const navigate = useNavigate();
                   className="flex items-center space-x-4 p-4 rounded-xl bg-white/50 hover:bg-white/80 transition-colors duration-300"
                 >
                   <Avatar className="w-12 h-12 border-2 border-purple-200">
-                    <AvatarImage src={activity.avatar || "/placeholder.svg"} alt="User" />
+                    <AvatarImage src={activity.avatar || "/image/mbappe.png"} alt="User" />
                     <AvatarFallback className="bg-gradient-to-r from-pink-500 to-purple-600 text-white">
                       U
                     </AvatarFallback>
@@ -286,7 +272,7 @@ const navigate = useNavigate();
           </CardContent>
         </Card>
 
-        {/* Actions rapides */}
+        {/* Actions rapides
         <div className="mt-12 text-center">
           <h3 className="text-xl font-semibold text-gray-800 mb-6">Actions rapides</h3>
           <div className="flex flex-wrap justify-center gap-4">
@@ -303,7 +289,7 @@ const navigate = useNavigate();
               🎯 Ajuster mes préférences
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
