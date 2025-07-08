@@ -1,7 +1,16 @@
 version: '3.8'
 services:
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
+    restart: unless-stopped
+    ports:
+      - "8978:8978"
+    volumes:
+      - cloudbeaver_data:/opt/cloudbeaver/workspace
+
   frontend:
-    build: 
+    build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: ft_matcha_frontend
@@ -16,6 +25,7 @@ services:
       - backend
     networks:
       - ft_matcha_network
+
   backend:
     build:
       context: ./backend
@@ -30,7 +40,8 @@ services:
       - NODE_ENV=development
     networks:
       - ft_matcha_network
-   # Base de données (optionnel pour plus tard)
+
+  # Base de données (optionnel pour plus tard)
   # database:
   #   image: postgres:15-alpine
   #   container_name: ft_matcha_db
@@ -49,6 +60,6 @@ networks:
   ft_matcha_network:
     driver: bridge
 
-# volumes:
-#   postgres_data:
-  
+volumes:
+  cloudbeaver_data:
+  # postgres_data:
