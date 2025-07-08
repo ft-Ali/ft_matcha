@@ -4,6 +4,8 @@ import  {useState, useEffect } from "react"
 import  Button  from "./UI/Button"
 import  Input  from "./UI/Input"
 import  Label  from "./UI/Label"
+import  {Card,CardContent}  from "./UI/Card"
+
 import { useNavigate } from 'react-router-dom';
 
   export default function HomePage() {
@@ -154,7 +156,7 @@ import { useNavigate } from 'react-router-dom';
         </div>
       </section>
 
-      {/* Features avec design cards moderne */}
+      {/* Features avec design Cards moderne */}
       <section id="features" className="py-20 relative">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -169,8 +171,8 @@ import { useNavigate } from 'react-router-dom';
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-pink-50 to-purple-50 hover:-translate-y-2">
-              <cardcontent className="p-8 text-center">
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-pink-50 to-purple-50 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🧬</span>
                 </div>
@@ -178,11 +180,11 @@ import { useNavigate } from 'react-router-dom';
                 <p className="text-gray-600 leading-relaxed">
                   Notre IA analyse la compatibilité entre vous et vos animaux pour des rencontres parfaites
                 </p>
-              </cardcontent>
-            </card>
+              </CardContent>
+            </Card>
 
-            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-purple-50 to-indigo-50 hover:-translate-y-2">
-              <cardcontent className="p-8 text-center">
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-purple-50 to-indigo-50 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🛡️</span>
                 </div>
@@ -190,11 +192,11 @@ import { useNavigate } from 'react-router-dom';
                 <p className="text-gray-600 leading-relaxed">
                   Vérification d'identité, modération 24/7 et signalement pour une communauté saine
                 </p>
-              </cardcontent>
-            </card>
+              </CardContent>
+            </Card>
 
-            <card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-indigo-50 to-pink-50 hover:-translate-y-2">
-              <cardcontent className="p-8 text-center">
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-indigo-50 to-pink-50 hover:-translate-y-2">
+              <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">🌍</span>
                 </div>
@@ -202,8 +204,8 @@ import { useNavigate } from 'react-router-dom';
                 <p className="text-gray-600 leading-relaxed">
                   Rejoignez une communauté mondiale de passionnés d'animaux dans plus de 50 pays
                 </p>
-              </cardcontent>
-            </card>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

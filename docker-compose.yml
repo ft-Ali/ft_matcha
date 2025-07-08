@@ -1,10 +1,54 @@
+version: '3.8'
 services:
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ft_matcha_frontend
     ports:
       - "5173:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    command: npm run dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+    networks:
+      - ft_matcha_network
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ft_matcha_backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - ft_matcha_network
+   # Base de données (optionnel pour plus tard)
+  # database:
+  #   image: postgres:15-alpine
+  #   container_name: ft_matcha_db
+  #   environment:
+  #     POSTGRES_DB: ft_matcha
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - ft_matcha_network
+
+networks:
+  ft_matcha_network:
+    driver: bridge
+
+# volumes:
+#   postgres_data:
   
